@@ -5,7 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "Employee")
 public class Employee {
 
     @Id
@@ -21,7 +21,7 @@ public class Employee {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private Double salary;
 
     public Long getId() {
@@ -38,5 +38,21 @@ public class Employee {
 
     public Double getSalary() {
         return salary;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 }
