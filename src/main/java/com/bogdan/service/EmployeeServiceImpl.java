@@ -73,11 +73,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.isEmpty() ? new ArrayList<>() : employees;
     }
 
-//    public List<Employee> getTop3EmployeesBySalary() {
-//        return employeeRepository.findTop3BySalary();
-//    }
+    public List<Employee> getTop3EmployeesBySalary() {
+        List<Employee> employees = employeeRepository.findTop3ByOrderBySalaryDesc();
+        return employees.isEmpty() ? new ArrayList<>() : employees;
+    }
 
     public void deleteEmployee(Long id) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+
+        if (!optionalEmployee.isPresent()) {
+            throw new EntityNotFoundException("Employee with id: " + id + " not found!");
+        }
+
         employeeRepository.deleteById(id);
     }
 }
