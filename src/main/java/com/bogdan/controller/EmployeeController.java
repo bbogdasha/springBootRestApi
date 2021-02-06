@@ -27,7 +27,6 @@ public class EmployeeController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //error didn't work correct
     @GetMapping("/id/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         Employee employee = employeeServiceImpl.getEmployeeById(id);
@@ -36,7 +35,6 @@ public class EmployeeController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //error didn't work correct
     @GetMapping("/email/{email}")
     public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable String email) {
         Employee employee = employeeServiceImpl.getEmployeeByEmail(email);
@@ -61,21 +59,18 @@ public class EmployeeController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //error didn't work correct
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@RequestBody @Valid Employee emp) {
         Employee employee = employeeServiceImpl.createEmployee(emp);
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
-    //error didn't work correct
     @PutMapping("/update/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody @Valid Employee emp) {
         Employee employee = employeeServiceImpl.updateEmployee(id, emp);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    //error didn't work correct
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
         employeeServiceImpl.deleteEmployee(id);

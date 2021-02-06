@@ -1,12 +1,12 @@
 package com.bogdan.service;
 
 import com.bogdan.exception.EmployeeCreateException;
+import com.bogdan.exception.EmployeeNotFoundException;
 import com.bogdan.model.Employee;
 import com.bogdan.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +34,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee updateEmployee(Long id, Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        Optional<Employee> optionalEmployeeEmail = employeeRepository.findByEmail(employee.getEmail());
 
         if (!optionalEmployee.isPresent()) {
-            throw new EntityNotFoundException("Employee with id: " + id + " not found!");
+            throw new EmployeeNotFoundException("Employee with id: " + id + " not found!");
+        } else if (optionalEmployeeEmail.isPresent() && !optionalEmployeeEmail.get().getId().equals(id)) {
+            throw new EmployeeCreateException("Error update exists Employee: this email: " +
+                    employee.getEmail() + " already exists!");
         }
         employee.setId(optionalEmployee.get().getId());
 
@@ -47,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
         if (!optionalEmployee.isPresent()) {
-            throw new EntityNotFoundException("Employee with id: " + id + " not found!");
+            throw new EmployeeNotFoundException("Employee with id: " + id + " not found!");
         }
 
         return optionalEmployee.get();
@@ -57,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findByEmail(email);
 
         if (!optionalEmployee.isPresent()) {
-            throw new EntityNotFoundException("Employee with email: " + email + " not found!");
+            throw new EmployeeNotFoundException("Employee with email: " + email + " not found!");
         }
 
         return optionalEmployee.get();
@@ -82,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
         if (!optionalEmployee.isPresent()) {
-            throw new EntityNotFoundException("Employee with id: " + id + " not found!");
+            throw new EmployeeNotFoundException("Employee with id: " + id + " not found!");
         }
 
         employeeRepository.deleteById(id);
