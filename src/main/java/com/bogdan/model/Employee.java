@@ -24,6 +24,13 @@ public class Employee {
     @Column(length = 100)
     private Double salary;
 
+    public Employee(Long id, String name, String email, Double salary) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.salary = salary;
+    }
+
     public Long getId() {
         return id;
     }
