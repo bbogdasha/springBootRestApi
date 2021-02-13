@@ -2,6 +2,7 @@ package com.bogdan.controller;
 
 import com.bogdan.model.Employee;
 import com.bogdan.service.EmployeeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class EmployeeController {
 
     private final EmployeeServiceImpl employeeServiceImpl;
 
+    @Autowired
     public EmployeeController(EmployeeServiceImpl employeeServiceImpl) {
         this.employeeServiceImpl = employeeServiceImpl;
     }

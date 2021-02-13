@@ -4,6 +4,7 @@ import com.bogdan.exception.EmployeeCreateException;
 import com.bogdan.exception.EmployeeNotFoundException;
 import com.bogdan.model.Employee;
 import com.bogdan.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +18,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
+    @Override
     public Employee createEmployee(Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findByEmail(employee.getEmail());
 
@@ -32,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    @Override
     public Employee updateEmployee(Long id, Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         Optional<Employee> optionalEmployeeEmail = employeeRepository.findByEmail(employee.getEmail());
@@ -47,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    @Override
     public Employee getEmployeeById(Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
@@ -57,6 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return optionalEmployee.get();
     }
 
+    @Override
     public Employee getEmployeeByEmail(String email) {
         Optional<Employee> optionalEmployee = employeeRepository.findByEmail(email);
 
@@ -67,21 +73,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         return optionalEmployee.get();
     }
 
+    @Override
     public List<Employee> getEmployeesByName(String name) {
         List<Employee> employees = employeeRepository.findByName(name);
         return employees.isEmpty() ? new ArrayList<>() : employees;
     }
 
+    @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         return employees.isEmpty() ? new ArrayList<>() : employees;
     }
 
+    @Override
     public List<Employee> getTop3EmployeesBySalary() {
         List<Employee> employees = employeeRepository.findTop3ByOrderBySalaryDesc();
         return employees.isEmpty() ? new ArrayList<>() : employees;
     }
 
+    @Override
     public void deleteEmployee(Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
