@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public Employee deleteEmployee(Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 
         if (!optionalEmployee.isPresent()) {
@@ -100,5 +100,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         employeeRepository.deleteById(id);
+        return optionalEmployee.get();
     }
 }

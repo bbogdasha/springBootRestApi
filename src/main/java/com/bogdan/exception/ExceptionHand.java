@@ -12,17 +12,17 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionHand extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(EmployeeCreateException.class)
-    public ResponseEntity<Map<String, String>> exception(EmployeeCreateException exception) {
-        return errorCreateEmployee(exception.getMessage());
-    }
-
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<Map<String, String>> exception(EmployeeNotFoundException exception) {
         return notFoundEmployee(exception.getMessage());
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(EmployeeCreateException.class)
+    public ResponseEntity<Map<String, String>> exception(EmployeeCreateException exception) {
+        return errorCreateEmployee(exception.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> exception(Exception exception) {
         Map<String, String> response = prepareResponse(
                 exception.getMessage(),
@@ -36,9 +36,9 @@ public class ExceptionHand extends ResponseEntityExceptionHandler {
         Map<String, String> response = prepareResponse(
                 message,
                 "Please enter valid data: Name, Email(unique), Salary.",
-                HttpStatus.METHOD_NOT_ALLOWED.toString()
+                HttpStatus.BAD_REQUEST.toString()
         );
-        return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<Map<String, String>> notFoundEmployee(String message) {

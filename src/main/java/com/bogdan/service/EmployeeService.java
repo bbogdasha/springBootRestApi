@@ -20,5 +20,5 @@ public interface EmployeeService {
 
     List<Employee> getTop3EmployeesBySalary();
 
-    void deleteEmployee(Long id);
+    Employee deleteEmployee(Long id);
 }
