@@ -36,19 +36,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee employee) {
+    public Employee updateEmployee(Long id, Employee updateEmployee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-        Optional<Employee> optionalEmployeeEmail = employeeRepository.findByEmail(employee.getEmail());
+        Optional<Employee> optionalEmployeeEmail = employeeRepository.findByEmail(updateEmployee.getEmail());
 
         if (!optionalEmployee.isPresent()) {
             throw new EmployeeNotFoundException("Employee with id: " + id + " not found!");
         } else if (optionalEmployeeEmail.isPresent() && !optionalEmployeeEmail.get().getId().equals(id)) {
             throw new EmployeeCreateException("Error update exists Employee: this email: " +
-                    employee.getEmail() + " already exists!");
+                    updateEmployee.getEmail() + " already exists!");
         }
-        employee.setId(optionalEmployee.get().getId());
+        
+        Employee newEmployee = optionalEmployee.get();
+        newEmployee.setName(updateEmployee.getName());
+        newEmployee.setEmail(updateEmployee.getEmail());
+        newEmployee.setSalary(updateEmployee.getSalary());
 
-        return employeeRepository.save(employee);
+        return employeeRepository.save(newEmployee);
     }
 
     @Override
