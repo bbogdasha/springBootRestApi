@@ -59,50 +59,73 @@ Got a response status 200 and:
         "id": 1,
         "name": "Carl",
         "email": "carl@mail.com",
-        "salary": 2455.22998046875
+        "salary": 2455.23
     },
     {
         "id": 2,
         "name": "Johny",
         "email": "johny@mail.com",
-        "salary": 1400.530029296875
+        "salary": 1400.53
     },
     {
         "id": 3,
         "name": "Emily",
         "email": "emily@mail.com",
-        "salary": 1540.1300048828125
+        "salary": 1540.13
     },
     {
         "id": 4,
         "name": "Bob",
         "email": "bob@mail.com",
-        "salary": 3450.77001953125
+        "salary": 3450.77
     },
     {
         "id": 5,
         "name": "Ann",
         "email": "ann@mail.com",
-        "salary": 1899.77001953125
+        "salary": 1899.77
     },
     {
         "id": 6,
         "name": "Johny",
         "email": "jojo@mail.com",
-        "salary": 2160.77001953125
+        "salary": 2160.77
     },
     {
         "id": 7,
         "name": "Janny",
         "email": "janny@gmail.com",
-        "salary": 1200.22998046875
+        "salary": 1200.23
     }
 ]
 ```
 
 ---
 
-**3. GET - get an existing employee by id**
+**3. PUT - update exists employee**
+
+Update employee by 3 id:
+```json
+{
+    "name": "Emmy",
+    "email": "emmy@gmail.com",
+    "salary": "1600.23"
+}
+```
+
+Updated existing employee with id 3:
+```json
+{
+    "id": 3,
+    "name": "Emmy",
+    "email": "emmy@gmail.com",
+    "salary": 1600.23
+}
+```
+
+---
+
+**4. GET - get an existing employee by id**
 
 Got an employee by 6 id:
 ```json
@@ -110,13 +133,13 @@ Got an employee by 6 id:
     "id": 6,
     "name": "Johny",
     "email": "jojo@mail.com",
-    "salary": 2160.77001953125
+    "salary": 2160.77
 }
 ```
 
 ---
 
-**4. GET - get an existing employee by email**
+**5. GET - get an existing employee by email**
 
 Got an employee by janny@gmail .com email:
 ```json
@@ -124,13 +147,13 @@ Got an employee by janny@gmail .com email:
     "id": 7,
     "name": "Janny",
     "email": "janny@gmail.com",
-    "salary": 1200.22998046875
+    "salary": 1200.23
 }
 ```
 
 ---
 
-**5. GET - get an existing employees by name**
+**6. GET - get an existing employees by name**
 
 Got employees by Johny name:
 ```json
@@ -139,20 +162,20 @@ Got employees by Johny name:
         "id": 2,
         "name": "Johny",
         "email": "johny@mail.com",
-        "salary": 1400.530029296875
+        "salary": 1400.53
     },
     {
         "id": 6,
         "name": "Johny",
         "email": "jojo@mail.com",
-        "salary": 2160.77001953125
+        "salary": 2160.77
     }
 ]
 ```
 
 ---
 
-** 6. GET - get an existing top 3 employees by salary**
+** 7. GET - get an existing top 3 employees by salary**
 
 Got top 3 employees by salary:
 ```json
@@ -161,26 +184,26 @@ Got top 3 employees by salary:
         "id": 4,
         "name": "Bob",
         "email": "bob@mail.com",
-        "salary": 3450.77001953125
+        "salary": 3450.77
     },
     {
         "id": 1,
         "name": "Carl",
         "email": "carl@mail.com",
-        "salary": 2455.22998046875
+        "salary": 2455.23
     },
     {
         "id": 6,
         "name": "Johny",
         "email": "jojo@mail.com",
-        "salary": 2160.77001953125
+        "salary": 2160.77
     }
 ]
 ```
 
 ---
 
-7. DELETE - delete existing employee**
+8. DELETE - delete existing employee**
 
 Deleted employee by 5 id and got status 200.
 
